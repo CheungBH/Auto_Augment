@@ -10,5 +10,9 @@ dest_ls = [name.replace(img_folder, dest_folder) for name in img_ls]
 
 for idx in range(len(img_ls)):
     img = cv2.imread(img_ls[idx])
-    resize_img = cv2.resize(img, (540, 360))
-    cv2.imwrite(dest_ls[idx], resize_img)
+    try:
+        resize_img = cv2.resize(img, (64, 128))
+        cv2.imwrite(dest_ls[idx], resize_img)
+    except:
+        print(img_ls[idx])
+        raise ValueError("Some problem occurs when reading the image! The wrong file is {}".format(img_ls[idx]))
